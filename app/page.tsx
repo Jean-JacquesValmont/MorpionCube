@@ -1,8 +1,9 @@
+import GameScreen from "@/components/GameScreen";
 
 export default function Home() {
   return (
-    <main className="">
-      
+    <main>
+      <GameScreen />
     </main>
   );
 }
