@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import Square from './Square'
 
-function Board() {
+function MainCubeFace({ transferValues } : any) {
     const [squares, setSquares] = useState(Array(9).fill(null));
     const [xIsNext, setXIsNext] = useState(true);
 
@@ -51,25 +51,29 @@ function Board() {
     }
 
     return (
-        <div>
+        <div className='m-2'>
             <div className="status">{status}</div>
-            <div className="board-row">
+            <div className="flex">
                 {renderSquare(0)}
                 {renderSquare(1)}
                 {renderSquare(2)}
+                <button className="border-2 border-black m-2" onClick={() => transferValues(squares)}>{">"}</button>
             </div>
-            <div className="board-row">
+            <div className="flex">
                 {renderSquare(3)}
                 {renderSquare(4)}
                 {renderSquare(5)}
+                <button className="border-2 border-black m-2" onClick={() => transferValues(squares)}>{">"}</button>
             </div>
-            <div className="board-row">
+            <div className="flex">
                 {renderSquare(6)}
                 {renderSquare(7)}
                 {renderSquare(8)}
+                <button className="border-2 border-black m-2" onClick={() => transferValues(squares)}>{">"}</button>
             </div>
+            <button className="border-2 border-black mt-2" onClick={() => transferValues(squares)}>Transférer les valeurs</button>
         </div>
     )
 }
 
-export default Board
+export default MainCubeFace
