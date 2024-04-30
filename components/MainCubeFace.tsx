@@ -3,22 +3,21 @@
 import React, { useState } from 'react'
 import Square from './Square'
 
-function MainCubeFace({ transferValues } : any) {
-    const [squares, setSquares] = useState(Array(9).fill(null));
+function MainCubeFace({ squaresValues, updatedFrontFaceValues, line} : any) {
     const [xIsNext, setXIsNext] = useState(true);
 
     const handleClick = (i:any) =>{
-        const newSquares = squares.slice();
+        const newSquares = squaresValues.slice();
         if (calculateWinner(newSquares) || newSquares[i]) {
         return;
         }
         newSquares[i] = xIsNext ? 'X' : 'O';
-        setSquares(newSquares);
+        updatedFrontFaceValues(newSquares)
         setXIsNext(!xIsNext);
     }
-
+    
     const renderSquare = (i:any) => {
-        return <Square value={squares[i]} onClick={() => handleClick(i)} />;
+        return <Square value={squaresValues[i]} onClick={() => handleClick(i)} />;
       };
 
     const calculateWinner = (squares:any) => {
@@ -41,7 +40,7 @@ function MainCubeFace({ transferValues } : any) {
         return null;
     };
 
-    const winner = calculateWinner(squares);
+    const winner = calculateWinner(squaresValues);
 
     let status;
     if (winner) {
@@ -53,25 +52,37 @@ function MainCubeFace({ transferValues } : any) {
     return (
         <div className='m-2'>
             <div className="status">{status}</div>
+            <div className=''>
+                <button className="border-2 border-black m-2 p-2" onClick={() => ""}>{"^"}</button>
+                <button className="border-2 border-black m-2 p-2" onClick={() => ""}>{"^"}</button>
+                <button className="border-2 border-black m-2 p-2" onClick={() => ""}>{"^"}</button>
+            </div>
             <div className="flex">
+                <button className="border-2 border-black m-2" onClick={() => ""}>{"<"}</button>
                 {renderSquare(0)}
                 {renderSquare(1)}
                 {renderSquare(2)}
-                <button className="border-2 border-black m-2" onClick={() => transferValues(squares)}>{">"}</button>
+                <button className="border-2 border-black m-2" onClick={() => line(0, 1, 2, squaresValues)}>{">"}</button>
             </div>
             <div className="flex">
+                <button className="border-2 border-black m-2" onClick={() => ""}>{"<"}</button>
                 {renderSquare(3)}
                 {renderSquare(4)}
                 {renderSquare(5)}
-                <button className="border-2 border-black m-2" onClick={() => transferValues(squares)}>{">"}</button>
+                <button className="border-2 border-black m-2" onClick={() => line(3, 4, 5, squaresValues)}>{">"}</button>
             </div>
             <div className="flex">
+                <button className="border-2 border-black m-2" onClick={() => ""}>{"<"}</button>
                 {renderSquare(6)}
                 {renderSquare(7)}
                 {renderSquare(8)}
-                <button className="border-2 border-black m-2" onClick={() => transferValues(squares)}>{">"}</button>
+                <button className="border-2 border-black m-2" onClick={() => line(6, 7, 8, squaresValues)}>{">"}</button>
             </div>
-            <button className="border-2 border-black mt-2" onClick={() => transferValues(squares)}>Transférer les valeurs</button>
+            <div className=''>
+                <button className="border-2 border-black m-2 p-2" onClick={() => ""}>{"v"}</button>
+                <button className="border-2 border-black m-2 p-2" onClick={() => ""}>{"v"}</button>
+                <button className="border-2 border-black m-2 p-2" onClick={() => ""}>{"v"}</button>
+            </div>
         </div>
     )
 }
