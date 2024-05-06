@@ -17,111 +17,51 @@ const GameScreen = () => {
     setFrontFaceValues(newSquares);
   }
 
-  const transferLineRight = (a:any ,b:any ,c:any, values:any ) => {
+  const transferLine = (a:any ,b:any ,c:any, values:any, firstFace:any, secondFace:any, direction:string ) => {
     const rememberValues = [...values]
 
-    frontFaceValues[a] = leftFaceValues[a];
-    frontFaceValues[b] = leftFaceValues[b];
-    frontFaceValues[c] = leftFaceValues[c];
+    frontFaceValues[a] = firstFace[a];
+    frontFaceValues[b] = firstFace[b];
+    frontFaceValues[c] = firstFace[c];
     setFrontFaceValues([...frontFaceValues]);
 
-    leftFaceValues[a] = behindFaceValues[a];
-    leftFaceValues[b] = behindFaceValues[b];
-    leftFaceValues[c] = behindFaceValues[c];
-    setLeftFaceValues([...leftFaceValues]);
+    firstFace[a] = behindFaceValues[a];
+    firstFace[b] = behindFaceValues[b];
+    firstFace[c] = behindFaceValues[c];
 
-    behindFaceValues[a] = rightFaceValues[a];
-    behindFaceValues[b] = rightFaceValues[b];
-    behindFaceValues[c] = rightFaceValues[c];
+    behindFaceValues[a] = secondFace[a];
+    behindFaceValues[b] = secondFace[b];
+    behindFaceValues[c] = secondFace[c];
     setBehindFaceValues([...behindFaceValues]);
 
-    rightFaceValues[a] = rememberValues[a];
-    rightFaceValues[b] = rememberValues[b];
-    rightFaceValues[c] = rememberValues[c];
-    setRightFaceValues([...rightFaceValues]);
-  }
-
-  const transferLineLeft = (a:any ,b:any ,c:any, values:any ) => {
-    const rememberValues = [...values]
-
-    frontFaceValues[a] = rightFaceValues[a];
-    frontFaceValues[b] = rightFaceValues[b];
-    frontFaceValues[c] = rightFaceValues[c];
-    setFrontFaceValues([...frontFaceValues]);
-
-    rightFaceValues[a] = behindFaceValues[a];
-    rightFaceValues[b] = behindFaceValues[b];
-    rightFaceValues[c] = behindFaceValues[c];
-    setRightFaceValues([...rightFaceValues]);
-
-    behindFaceValues[a] = leftFaceValues[a];
-    behindFaceValues[b] = leftFaceValues[b];
-    behindFaceValues[c] = leftFaceValues[c];
-    setBehindFaceValues([...behindFaceValues]);
-
-    leftFaceValues[a] = rememberValues[a];
-    leftFaceValues[b] = rememberValues[b];
-    leftFaceValues[c] = rememberValues[c];
-    setLeftFaceValues([...leftFaceValues]);
-  }
-
-  const transferLineTop = (a:any ,b:any ,c:any, values:any ) => {
-    const rememberValues = [...values]
-
-    frontFaceValues[a] = bottomFaceValues[a];
-    frontFaceValues[b] = bottomFaceValues[b];
-    frontFaceValues[c] = bottomFaceValues[c];
-    setFrontFaceValues([...frontFaceValues]);
-
-    bottomFaceValues[a] = behindFaceValues[a];
-    bottomFaceValues[b] = behindFaceValues[b];
-    bottomFaceValues[c] = behindFaceValues[c];
-    setBottomFaceValues([...bottomFaceValues]);
-
-    behindFaceValues[a] = topFaceValues[a];
-    behindFaceValues[b] = topFaceValues[b];
-    behindFaceValues[c] = topFaceValues[c];
-    setBehindFaceValues([...behindFaceValues]);
-
-    topFaceValues[a] = rememberValues[a];
-    topFaceValues[b] = rememberValues[b];
-    topFaceValues[c] = rememberValues[c];
-    setTopFaceValues([...topFaceValues]);
-  }
-
-  const transferLineBottom = (a:any ,b:any ,c:any, values:any ) => {
-    const rememberValues = [...values]
-
-    frontFaceValues[a] = topFaceValues[a];
-    frontFaceValues[b] = topFaceValues[b];
-    frontFaceValues[c] = topFaceValues[c];
-    setFrontFaceValues([...frontFaceValues]);
-
-    topFaceValues[a] = behindFaceValues[a];
-    topFaceValues[b] = behindFaceValues[b];
-    topFaceValues[c] = behindFaceValues[c];
-    setTopFaceValues([...topFaceValues]);
-
-    behindFaceValues[a] = bottomFaceValues[a];
-    behindFaceValues[b] = bottomFaceValues[b];
-    behindFaceValues[c] = bottomFaceValues[c];
-    setBehindFaceValues([...behindFaceValues]);
-
-    bottomFaceValues[a] = rememberValues[a];
-    bottomFaceValues[b] = rememberValues[b];
-    bottomFaceValues[c] = rememberValues[c];
-    setBottomFaceValues([...bottomFaceValues]);
+    secondFace[a] = rememberValues[a];
+    secondFace[b] = rememberValues[b];
+    secondFace[c] = rememberValues[c];
+    
+    if(direction == "left"){
+      setRightFaceValues([...firstFace]);
+      setLeftFaceValues([...secondFace]);
+    }else if(direction == "right"){
+      setLeftFaceValues([...firstFace]);
+      setRightFaceValues([...secondFace]);
+    }else if(direction == "top"){
+      setBottomFaceValues([...firstFace]);
+      setTopFaceValues([...secondFace]);
+    }else if(direction == "bottom"){
+      setTopFaceValues([...firstFace]);
+      setBottomFaceValues([...secondFace]);
+    }
   }
 
   const line = (indexOne:any, indexTwo:any, indexThree:any , values:any, direction:string) => {
     if(direction == "right"){
-      transferLineRight(indexOne, indexTwo, indexThree, values)
+      transferLine (indexOne, indexTwo, indexThree, values, leftFaceValues, rightFaceValues, direction)
     }else if (direction == "left"){
-      transferLineLeft(indexOne, indexTwo, indexThree, values)
+      transferLine (indexOne, indexTwo, indexThree, values, rightFaceValues, leftFaceValues, direction)
     }else if(direction == "top"){
-      transferLineTop(indexOne, indexTwo, indexThree, values)
+      transferLine (indexOne, indexTwo, indexThree, values, bottomFaceValues, topFaceValues, direction)
     }else if(direction == "bottom"){
-      transferLineBottom(indexOne, indexTwo, indexThree, values)
+      transferLine (indexOne, indexTwo, indexThree, values, topFaceValues, bottomFaceValues, direction)
     }
   }
 
@@ -142,7 +82,6 @@ const GameScreen = () => {
         <TransitionCubeFace squareValues={behindFaceValues} nameFace={"Behind Face"}/>
       </div>
     </div>
-    
     
   )
 }
