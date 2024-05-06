@@ -53,35 +53,35 @@ function MainCubeFace({ squaresValues, updatedFrontFaceValues, line} : any) {
         <div className='m-2'>
             <div className="status">{status}</div>
             <div className=''>
-                <button className="border-2 border-black m-2 p-2" onClick={() => ""}>{"^"}</button>
-                <button className="border-2 border-black m-2 p-2" onClick={() => ""}>{"^"}</button>
-                <button className="border-2 border-black m-2 p-2" onClick={() => ""}>{"^"}</button>
+                <button className="border-2 border-black m-2 p-2" onClick={() => line(0, 3, 6, squaresValues, "top")}>{"^"}</button>
+                <button className="border-2 border-black m-2 p-2" onClick={() => line(1, 4, 7, squaresValues, "top")}>{"^"}</button>
+                <button className="border-2 border-black m-2 p-2" onClick={() => line(2, 5, 8, squaresValues, "top")}>{"^"}</button>
             </div>
             <div className="flex">
-                <button className="border-2 border-black m-2" onClick={() => ""}>{"<"}</button>
+                <button className="border-2 border-black m-2" onClick={() => line(0, 1, 2, squaresValues, "left")}>{"<"}</button>
                 {renderSquare(0)}
                 {renderSquare(1)}
                 {renderSquare(2)}
-                <button className="border-2 border-black m-2" onClick={() => line(0, 1, 2, squaresValues)}>{">"}</button>
+                <button className="border-2 border-black m-2" onClick={() => line(0, 1, 2, squaresValues, "right")}>{">"}</button>
             </div>
             <div className="flex">
-                <button className="border-2 border-black m-2" onClick={() => ""}>{"<"}</button>
+                <button className="border-2 border-black m-2" onClick={() => line(3, 4, 5, squaresValues, "left")}>{"<"}</button>
                 {renderSquare(3)}
                 {renderSquare(4)}
                 {renderSquare(5)}
-                <button className="border-2 border-black m-2" onClick={() => line(3, 4, 5, squaresValues)}>{">"}</button>
+                <button className="border-2 border-black m-2" onClick={() => line(3, 4, 5, squaresValues, "right")}>{">"}</button>
             </div>
             <div className="flex">
-                <button className="border-2 border-black m-2" onClick={() => ""}>{"<"}</button>
+                <button className="border-2 border-black m-2" onClick={() => line(6, 7, 8, squaresValues, "left")}>{"<"}</button>
                 {renderSquare(6)}
                 {renderSquare(7)}
                 {renderSquare(8)}
-                <button className="border-2 border-black m-2" onClick={() => line(6, 7, 8, squaresValues)}>{">"}</button>
+                <button className="border-2 border-black m-2" onClick={() => line(6, 7, 8, squaresValues, "right")}>{">"}</button>
             </div>
             <div className=''>
-                <button className="border-2 border-black m-2 p-2" onClick={() => ""}>{"v"}</button>
-                <button className="border-2 border-black m-2 p-2" onClick={() => ""}>{"v"}</button>
-                <button className="border-2 border-black m-2 p-2" onClick={() => ""}>{"v"}</button>
+                <button className="border-2 border-black m-2 p-2" onClick={() => line(0, 3, 6, squaresValues, "bottom")}>{"v"}</button>
+                <button className="border-2 border-black m-2 p-2" onClick={() => line(1, 4, 7, squaresValues, "bottom")}>{"v"}</button>
+                <button className="border-2 border-black m-2 p-2" onClick={() => line(2, 5, 8, squaresValues, "bottom")}>{"v"}</button>
             </div>
         </div>
     )
