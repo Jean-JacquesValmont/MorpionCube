@@ -1,10 +1,7 @@
-"use client"
-
 import React, { useState } from 'react'
 import Square from './Square'
 
-function MainCubeFace({ squaresValues, updatedFrontFaceValues, line} : any) {
-    const [xIsNext, setXIsNext] = useState(true);
+function MainCubeFace({ squaresValues, updatedFrontFaceValues, line, xIsNext, setXIsNext} : any) {
 
     const handleClick = (i:any) =>{
         const newSquares = squaresValues.slice();

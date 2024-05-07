@@ -5,6 +5,7 @@ import MainCubeFace from './MainCubeFace'
 import TransitionCubeFace from './TransitionCubeFace'
 
 const GameScreen = () => {
+  const [xIsNext, setXIsNext] = useState(true);
   const [frontFaceValues, setFrontFaceValues] = useState(Array(9).fill(null));
   const [topFaceValues, setTopFaceValues] = useState(Array(9).fill(null));
   const [bottomFaceValues, setBottomFaceValues] = useState(Array(9).fill(null));
@@ -51,6 +52,8 @@ const GameScreen = () => {
       setTopFaceValues([...firstFace]);
       setBottomFaceValues([...secondFace]);
     }
+
+    setXIsNext(!xIsNext);
   }
 
   const line = (indexOne:any, indexTwo:any, indexThree:any , values:any, direction:string) => {
@@ -72,7 +75,7 @@ const GameScreen = () => {
       </div>
       <div className='flex'>
         <TransitionCubeFace squareValues={leftFaceValues} nameFace={"Left Face"}/>
-        <MainCubeFace squaresValues={frontFaceValues} updatedFrontFaceValues={updatedFrontFaceValues} line={line} />
+        <MainCubeFace squaresValues={frontFaceValues} updatedFrontFaceValues={updatedFrontFaceValues} line={line} xIsNext={xIsNext} setXIsNext={setXIsNext} />
         <TransitionCubeFace squareValues={rightFaceValues} nameFace={"Right Face"}/>
       </div>
       <div>
