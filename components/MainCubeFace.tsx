@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Square from './Square'
 
-function MainCubeFace({ squaresValues, updatedFrontFaceValues, line, xIsNext, setXIsNext} : any) {
+function MainCubeFace({ squaresValues, updatedFrontFaceValues, line, xIsNext, setXIsNext, buttonClicked, enabledAllLineButton} : any) {
 
     const handleClick = (i:any) =>{
         const newSquares = squaresValues.slice();
@@ -11,6 +11,7 @@ function MainCubeFace({ squaresValues, updatedFrontFaceValues, line, xIsNext, se
         newSquares[i] = xIsNext ? 'X' : 'O';
         updatedFrontFaceValues(newSquares)
         setXIsNext(!xIsNext);
+        enabledAllLineButton()
     }
     
     const renderSquare = (i:any) => {
@@ -50,35 +51,35 @@ function MainCubeFace({ squaresValues, updatedFrontFaceValues, line, xIsNext, se
         <div className='m-2'>
             <div className="status">{status}</div>
             <div className=''>
-                <button className="border-2 border-black m-2 p-2" onClick={() => line(0, 3, 6, squaresValues, "top")}>{"^"}</button>
-                <button className="border-2 border-black m-2 p-2" onClick={() => line(1, 4, 7, squaresValues, "top")}>{"^"}</button>
-                <button className="border-2 border-black m-2 p-2" onClick={() => line(2, 5, 8, squaresValues, "top")}>{"^"}</button>
+                <button className="border-2 border-black m-2 p-2" onClick={() => line(0, 3, 6, squaresValues, "top")} disabled={buttonClicked[0]}>{"^"}</button>
+                <button className="border-2 border-black m-2 p-2" onClick={() => line(1, 4, 7, squaresValues, "top")} disabled={buttonClicked[1]}>{"^"}</button>
+                <button className="border-2 border-black m-2 p-2" onClick={() => line(2, 5, 8, squaresValues, "top")} disabled={buttonClicked[2]}>{"^"}</button>
             </div>
             <div className="flex">
-                <button className="border-2 border-black m-2" onClick={() => line(0, 1, 2, squaresValues, "left")}>{"<"}</button>
+                <button className="border-2 border-black m-2" onClick={() => line(0, 1, 2, squaresValues, "left")} disabled={buttonClicked[3]}>{"<"}</button>
                 {renderSquare(0)}
                 {renderSquare(1)}
                 {renderSquare(2)}
-                <button className="border-2 border-black m-2" onClick={() => line(0, 1, 2, squaresValues, "right")}>{">"}</button>
+                <button className="border-2 border-black m-2" onClick={() => line(0, 1, 2, squaresValues, "right")} disabled={buttonClicked[9]}>{">"}</button>
             </div>
             <div className="flex">
-                <button className="border-2 border-black m-2" onClick={() => line(3, 4, 5, squaresValues, "left")}>{"<"}</button>
+                <button className="border-2 border-black m-2" onClick={() => line(3, 4, 5, squaresValues, "left")} disabled={buttonClicked[4]}>{"<"}</button>
                 {renderSquare(3)}
                 {renderSquare(4)}
                 {renderSquare(5)}
-                <button className="border-2 border-black m-2" onClick={() => line(3, 4, 5, squaresValues, "right")}>{">"}</button>
+                <button className="border-2 border-black m-2" onClick={() => line(3, 4, 5, squaresValues, "right")} disabled={buttonClicked[10]}>{">"}</button>
             </div>
             <div className="flex">
-                <button className="border-2 border-black m-2" onClick={() => line(6, 7, 8, squaresValues, "left")}>{"<"}</button>
+                <button className="border-2 border-black m-2" onClick={() => line(6, 7, 8, squaresValues, "left")} disabled={buttonClicked[5]}>{"<"}</button>
                 {renderSquare(6)}
                 {renderSquare(7)}
                 {renderSquare(8)}
-                <button className="border-2 border-black m-2" onClick={() => line(6, 7, 8, squaresValues, "right")}>{">"}</button>
+                <button className="border-2 border-black m-2" onClick={() => line(6, 7, 8, squaresValues, "right")} disabled={buttonClicked[11]}>{">"}</button>
             </div>
             <div className=''>
-                <button className="border-2 border-black m-2 p-2" onClick={() => line(0, 3, 6, squaresValues, "bottom")}>{"v"}</button>
-                <button className="border-2 border-black m-2 p-2" onClick={() => line(1, 4, 7, squaresValues, "bottom")}>{"v"}</button>
-                <button className="border-2 border-black m-2 p-2" onClick={() => line(2, 5, 8, squaresValues, "bottom")}>{"v"}</button>
+                <button className="border-2 border-black m-2 p-2" onClick={() => line(0, 3, 6, squaresValues, "bottom")} disabled={buttonClicked[6]}>{"v"}</button>
+                <button className="border-2 border-black m-2 p-2" onClick={() => line(1, 4, 7, squaresValues, "bottom")} disabled={buttonClicked[7]}>{"v"}</button>
+                <button className="border-2 border-black m-2 p-2" onClick={() => line(2, 5, 8, squaresValues, "bottom")} disabled={buttonClicked[8]}>{"v"}</button>
             </div>
         </div>
     )

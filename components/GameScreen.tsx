@@ -6,6 +6,7 @@ import TransitionCubeFace from './TransitionCubeFace'
 
 const GameScreen = () => {
   const [xIsNext, setXIsNext] = useState(true);
+  const [buttonClicked, setButtonClicked] = useState(Array(12).fill(false))
   const [frontFaceValues, setFrontFaceValues] = useState(Array(9).fill(null));
   const [topFaceValues, setTopFaceValues] = useState(Array(9).fill(null));
   const [bottomFaceValues, setBottomFaceValues] = useState(Array(9).fill(null));
@@ -56,6 +57,49 @@ const GameScreen = () => {
     setXIsNext(!xIsNext);
   }
 
+  const enabledAllLineButton = () => {
+    for(let i = 0; i < buttonClicked.length; i++){
+      buttonClicked[i] = false
+    }
+  }
+
+  const disabledLineButton = (indexOne:any, direction:string, ) => {
+    enabledAllLineButton()
+
+    if(direction == "top" && indexOne == 0){
+      buttonClicked[6] = true
+    }else if(direction == "top" && indexOne == 1){
+      buttonClicked[7] = true
+    }else if(direction == "top" && indexOne == 2){
+      buttonClicked[8] = true
+    }
+
+    if(direction == "left" && indexOne == 0){
+      buttonClicked[9] = true
+    }else if(direction == "left" && indexOne == 3){
+      buttonClicked[10] = true
+    }else if(direction == "left" && indexOne == 6){
+      buttonClicked[11] = true
+    }
+
+    if(direction == "bottom" && indexOne == 0){
+      buttonClicked[0] = true
+    }else if(direction == "bottom" && indexOne == 1){
+      buttonClicked[1] = true
+    }else if(direction == "bottom" && indexOne == 2){
+      buttonClicked[2] = true
+    }
+
+    if(direction == "right" && indexOne == 0){
+      buttonClicked[3] = true
+    }else if(direction == "right" && indexOne == 3){
+      buttonClicked[4] = true
+    }else if(direction == "right" && indexOne == 6){
+      buttonClicked[5] = true
+    }
+    setButtonClicked([...buttonClicked])
+  }
+
   const line = (indexOne:any, indexTwo:any, indexThree:any , values:any, direction:string) => {
     if(direction == "right"){
       transferLine (indexOne, indexTwo, indexThree, values, leftFaceValues, rightFaceValues, direction)
@@ -66,6 +110,8 @@ const GameScreen = () => {
     }else if(direction == "bottom"){
       transferLine (indexOne, indexTwo, indexThree, values, topFaceValues, bottomFaceValues, direction)
     }
+
+    disabledLineButton(indexOne, direction)
   }
 
   return (
@@ -75,7 +121,14 @@ const GameScreen = () => {
       </div>
       <div className='flex'>
         <TransitionCubeFace squareValues={leftFaceValues} nameFace={"Left Face"}/>
-        <MainCubeFace squaresValues={frontFaceValues} updatedFrontFaceValues={updatedFrontFaceValues} line={line} xIsNext={xIsNext} setXIsNext={setXIsNext} />
+        <MainCubeFace 
+          squaresValues={frontFaceValues} 
+          updatedFrontFaceValues={updatedFrontFaceValues} 
+          line={line} 
+          xIsNext={xIsNext} 
+          setXIsNext={setXIsNext}
+          buttonClicked={buttonClicked}
+          enabledAllLineButton={enabledAllLineButton} />
         <TransitionCubeFace squareValues={rightFaceValues} nameFace={"Right Face"}/>
       </div>
       <div>
